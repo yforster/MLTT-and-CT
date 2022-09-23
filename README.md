@@ -1,4 +1,6 @@
-# MLTT-and-CT
+# Notes on MLTT + CT
+
+
 
 Church's thesis ( $\mathsf{CT}$ ) states that every function of type $\mathbb{N} \to \mathbb{N}$ is computable in a (Turing-complete) model of computation. The concrete model does not matter, to state $\mathsf{CT}$ and discuss consequences it suffices to work up to a relation $c \sim f$ where $f : \mathbb{N} \to \mathbb{N}$ and $c : \mathbb{N}$ saying that the code $c$ computes the function $f$. Necessarily, this relation is extensional, i.e. if $\forall x.\;f x = g x$ then $c \sim f \leftrightarrow c \sim g$.
 
@@ -44,5 +46,19 @@ Furthermore, functional extensionality would imply that such a coding function t
 
 In short: Funect+CT in MLTT implies that the problem of determining whether $\forall x : \mathbb{N}.f n = 0$ is decidable and undecidable.
 
+## PMP's proposal
 
+We interpret MLTT+CT in MLTT with some constants + reduction rules. Then consistency of MLTT+CT follows by strong normalization of the target type theory.
+
+We add the following to MLTT:
+
+- an inductive type $\texttt{Program}$, similar to `Ast.term` in MetaCoq
+- an evaluation relation $\triangleright : \texttt{Program} \to \texttt{Program} \to \mathbb{T}$
+
+- constant $\texttt{Quote} : \forall A. A \to \texttt{Program}$
+- a reduction rule for $\texttt{Quote}$ on closed terms
+- a constant $c_f \Vdash f : A$ where $c_f : \texttt{Program}$, $f : A$ and $A : \mathbb{Type}$
+- a reduction rule $c \Vdash 0 : \mathbb{N} \equiv c_n \triangleright \overline 0$
+- a reduction rule $c \Vdash \mathsf{S} n : \mathbb{N} \equiv \exists c'. c_n \triangleright \overline{\mathsf{S}} c' \times c' \Vdash n : \mathbb{N}$
+- a reduction rule $c_f \Vdash f : (\Pi x : A. B x) \equiv \Pi (c_c : \Lambda) (x : A) (x_\xi : c \Vdash x). \mathsf{app} (c_f, c_x, x, x_\xi) \Vdash t x : B x$
 
