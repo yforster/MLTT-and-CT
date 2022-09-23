@@ -52,7 +52,7 @@ We interpret MLTT+CT in MLTT with some constants + reduction rules. Then consist
 
 We add the following to MLTT:
 
-- an inductive type $\texttt{Program}$, similar to `Ast.term` in MetaCoq
+- an inductive type $\texttt{Program}$, similar to `Ast.term` in MetaCoq, reifying the syntax of MLTT + the constants we are introducing in the next lines
 - an evaluation relation $\triangleright : \texttt{Program} \to \texttt{Program} \to \mathbb{T}$
 
 - constant $\texttt{Quote} : \forall A. A \to \texttt{Program}$
