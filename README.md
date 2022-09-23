@@ -1,6 +1,6 @@
 # MLTT-and-CT
 
-Church's thesis ($\mathsf{CT}$) states that every function of type $\mathbb{N} \to \mathbb{N}$ is computable in a (Turing-complete) model of computation. The concrete model does not matter, to state $\mathsf{CT}$ and discuss consequences it suffices to work up to a relation $c \sim f$ where $f : \mathbb{N} \to \mathbb{N}$ and $c : \mathbb{N}$ saying that the code $c$ computes the function $f$. Necessarily, this relation is extensional, i.e. if $\forall x.\;f x = g x$ then $c \sim f \leftrightarrow c \sim g$.
+Church's thesis ( $\mathsf{CT}$ ) states that every function of type $\mathbb{N} \to \mathbb{N}$ is computable in a (Turing-complete) model of computation. The concrete model does not matter, to state $\mathsf{CT}$ and discuss consequences it suffices to work up to a relation $c \sim f$ where $f : \mathbb{N} \to \mathbb{N}$ and $c : \mathbb{N}$ saying that the code $c$ computes the function $f$. Necessarily, this relation is extensional, i.e. if $\forall x.\;f x = g x$ then $c \sim f \leftrightarrow c \sim g$.
 
 The crucial consequence of $\mathsf{CT}$ is that it allows identifying functions of the type theory with computable functions. Thus, the usual definition of decidability of a predicate $\mathbb{N} \to \mathbb{P}$ (a set in set-theoretic foundations) can be equivalently given in terms of a model of computation, or simply as 
 
