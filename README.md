@@ -1,6 +1,6 @@
 # Notes on MLTT + CT
 
-
+## Why CT in MLTT contradicts funext
 
 Church's thesis ( $\mathsf{CT}$ ) states that every function of type $\mathbb{N} \to \mathbb{N}$ is computable in a (Turing-complete) model of computation. The concrete model does not matter, to state $\mathsf{CT}$ and discuss consequences it suffices to work up to a relation $c \sim f$ where $f : \mathbb{N} \to \mathbb{N}$ and $c : \mathbb{N}$ saying that the code $c$ computes the function $f$. Necessarily, this relation is extensional, i.e. if $\forall x.\;f x = g x$ then $c \sim f \leftrightarrow c \sim g$.
 
