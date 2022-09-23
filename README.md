@@ -50,15 +50,20 @@ In short: Funect+CT in MLTT implies that the problem of determining whether $\fo
 
 We interpret MLTT+CT in MLTT with some constants + reduction rules. Then consistency of MLTT+CT follows by strong normalization of the target type theory.
 
-We add the following to MLTT:
+We add the following 4 constants to MLTT:
 
 - an inductive type $\texttt{Program}$, similar to `Ast.term` in MetaCoq, reifying the syntax of MLTT + the constants we are introducing in the next lines
 - an evaluation relation $\triangleright : \texttt{Program} \to \texttt{Program} \to \mathbb{T}$
 
 - constant $\texttt{Quote} : \forall A. A \to \texttt{Program}$
 - a reduction rule for $\texttt{Quote}$ on closed terms
+
 - a constant $c_f \Vdash f : A$ where $c_f : \texttt{Program}$, $f : A$ and $A : \mathbb{Type}$
 - a reduction rule $c \Vdash 0 : \mathbb{N} \equiv c_n \triangleright \overline 0$
 - a reduction rule $c \Vdash \mathsf{S} n : \mathbb{N} \equiv \exists c'. c_n \triangleright \overline{\mathsf{S}} c' \times c' \Vdash n : \mathbb{N}$
 - a reduction rule $c_f \Vdash f : (\Pi x : A. B x) \equiv \Pi (c_c : \Lambda) (x : A) (x_\xi : c \Vdash x). \mathsf{app} (c_f, c_x, x, x_\xi) \Vdash t x : B x$
+
+- a constant proving that realizability is closed under anti-reduction. It is unclear what that means and whether one needs a small step reduction relation here.
+
+- a constant proving that $\forall A : \mathbb{T}.\forall a : A. \texttt{Quote}~a \Vdash a : A$.
 
