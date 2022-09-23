@@ -56,7 +56,7 @@ We add the following 4 constants to MLTT:
 - an evaluation relation $\triangleright : \texttt{Program} \to \texttt{Program} \to \mathbb{T}$
 
 - constant $\texttt{Quote} : \forall A. A \to \texttt{Program}$
-- a reduction rule for $\texttt{Quote}$ on closed terms
+- a reduction rule for $\texttt{Quote}$ on closed normal forms
 
 - a constant $c_f \Vdash f : A$ where $c_f : \texttt{Program}$, $f : A$ and $A : \mathbb{Type}$
 - a reduction rule $c \Vdash 0 : \mathbb{N} \equiv c_n \triangleright \overline 0$
@@ -65,5 +65,5 @@ We add the following 4 constants to MLTT:
 
 - a constant proving that realizability is closed under anti-reduction. It is unclear what that means and whether one needs a small step reduction relation here.
 
-- a constant proving that $\forall A : \mathbb{T}.\forall a : A. \texttt{Quote}~a \Vdash a : A$.
+- a constant of type $\forall A : \mathbb{T}.\forall a : A. \texttt{Quote}~a \Vdash a : A$.
 
