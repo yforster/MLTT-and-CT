@@ -60,11 +60,11 @@ Target theory := MLTT plus
 
 - a reduction rule for $\chi$ on closed normal forms (in empty context): 
     - for $\vdash t : \mathbb{N} \to \mathbb{N}$ in normal form, $\chi t$ is the "code/syntax of t
-    - otherwise $\chi t$ is stuck.
+    - otherwise $\chi\ t$ is stuck.
   The important point is to ensure that no convertible terms give different codes (in particular, $\chi$ is stable under substitution).
 
 - a constant $\vdash R : \Pi (f : \mathbb{N} \to \mathbb{N}). \Pi (n : \mathbb{N}). (\chi f) @ [n] \downarrow (f n)$
-where $ @ : \Lambda \to \Lambda \to \Lambda$ is the constructor for application in $\Lambda$, and $[ \cdot ] : nat \to \Lambda$ computes the syntax of a natural number.
+where $\ @\ : \Lambda \to \Lambda \to \Lambda$ is the constructor for application in $\Lambda$, and $[ \cdot ] : \mathbb{N} \to \Lambda$ computes the syntax of a natural number.
   
 - a reduction rule for $R$
 
