@@ -52,7 +52,7 @@ Agenda: We interpret MLTT+CT in MLTT with some constants + reduction rules. Then
 
 Target theory := MLTT plus
 
-- an inductive type $\Lambda$, similar to `Ast.term` in MetaCoq, reifying the syntax of MLTT + the constants we are introducing in the next lines
+- an inductive type $\Lambda$, similar to `Ast.term` in MetaCoq, reifying the syntax of MLTT + the constants we are introducing in the next lines. The constructors use the same symbol as the corresponding construction/constant but with an upper dot.
 
 - an evaluation relation $\downarrow : \Lambda \to \Lambda \to \square$
 
@@ -68,3 +68,11 @@ where $\ @\ : \Lambda \to \Lambda \to \Lambda$ is the constructor for applicatio
   
 - a reduction rule for $R$
 
+Now the challenge is to design a "good" type of codes ( $\Lambda$ ), so that reduction rules behave gracefully and so that one avoids the need to code for codes. This also requires understanding who are neutrals and values in this extension.
+
+Current (?) plan : 
+- include a constructor $q : \Lambda \rightarrow \Lambda$ in $\Lambda$
+- describe reduction using the meta-operation from objects $t$ to code, denoted $\lceil t \rceil$, which basically "dots" everything. Except for a few cases, and the open questions are, e.g., what should $\lceil \chi t \rceil$ be? ( $q\lceil t\rceil$ ? ) And $\lceil q \rceil$ ? What is the evaluation of :
+$\dot{\chi} @ (\dot{\lambda} (size @(e (Var 0)))$ with $e : \mathbb{N} \rightarrow \Lambda$ and $size : \Lambda \rightarrow \mathbb{N}$ ?
+
+May be should the reduction of $q$ and ceiling could lambdas.
