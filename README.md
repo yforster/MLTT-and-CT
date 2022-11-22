@@ -72,7 +72,7 @@ Now the challenge is to design a "good" type of codes ( $\Lambda$ ), so that red
 
 Current (?) plan : 
 - include a constructor $q : \Lambda \rightarrow \Lambda$ in $\Lambda$
-- describe reduction using the meta-operation from objects $t$ to code, denoted $\lceil t \rceil$, which basically "dots" everything. Except for a few cases, and the open questions are, e.g., what should $\lceil \chi t \rceil$ be? ( $q\lceil t\rceil$ ? ) And $\lceil q \rceil$ ? What is the evaluation of :
+- describe reduction using the meta-operation from objects $t$ in normal form to codes, denoted $\lceil t \rceil$, which basically "dots" everything. Except for a few cases, and the open questions are, e.g., what should $\lceil \chi t \rceil$ be? ( $q\lceil t\rceil$ ? ) And $\lceil q \rceil$ ? What is the evaluation of :
 $\dot{\chi} @ (\dot{\lambda} (size @(e (Var 0)))$ with $e : \mathbb{N} \rightarrow \Lambda$ and $size : \Lambda \rightarrow \mathbb{N}$ ?
 
 May be should the reduction of $q$ and ceiling could lambdas.
