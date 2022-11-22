@@ -89,4 +89,6 @@ Meta-operations on the object type theory:
 Employed to  specify the object operations $\chi, R$:
 - If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$ then $\mathrm{Cv}(\cdot \vdash \chi\ f \equiv \lceil f \rceil)$
 - If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$, $n \in \mathrm{Nf}(\cdot \vdash \mathbb{N})$, $r \in \mathrm{Nf}(\cdot \vdash \lceil f \rceil @\ [n]^{\mathbb{N}} \downarrow [f\ n]^{\mathbb{N}})$ then $\mathrm{Cv}(\cdot \vdash R\ f\ n \equiv r)$
+
+To prove in the NbE model:
 - If $t \in \mathrm{Tm}(\Gamma \vdash A), v \in \mathrm{Nf}(\Gamma \vdash A), p : Red(t,v)$ then $\mathrm{Nf}(\cdot \vdash \ulcorner t \urcorner \downarrow \ulcorner v\urcorner)$
