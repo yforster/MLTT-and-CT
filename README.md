@@ -84,9 +84,9 @@ Meta-operations on the object type theory:
 - $\ulcorner \cdot \urcorner : \mathrm{Tm}( \Gamma \vdash A) \to \mathrm{Tm}(\cdot \vdash \Lambda)$
 - $\lceil v \rceil := \ulcorner \texttt{injNf} v \urcorner$ where $\texttt{injNf} : \mathrm{Nf}(\Gamma \vdash A) \to \mathrm{Tm}(\Gamma \vdash A)$
 - $\sharp : \mathbb{N} \to \mathrm{Nf}(\cdot \vdash \mathbb{N})$
-- $\mathcal{O} : (f : \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N}))(n : \mathrm{Nf}(\cdot \vdash \mathbb{N})). \mathrm{Nf}(\cdot \vdash \lceil f \rceil @ [n]^{\mathbb{N}} \downarrow [f\,n]^{\mathbb{N}}) \to \square$
+- $\mathcal{O} : (f : \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N}))(n : \mathrm{Nf}(\cdot \vdash \mathbb{N})). \mathrm{Nf}(\cdot \vdash \lceil f \rceil @ [n]^{\mathbb{N}} \downarrow [f\,n]^{\mathbb{N}}) \to \square$ (not needed actually)
 
 Employed to  specify the object operations $\chi, R$:
-- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$ then $\mathrm{Cv}(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
-- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$, $n \in \mathrm{Nf}(\cdot \vdash \mathbb{N})$, $r \in \mathrm{Nf}(\cdot \vdash \lceil f \rceil @\,[n]^{\mathbb{N}} \downarrow [f\, n]^{\mathbb{N}})$ then $\mathrm{Cv}(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
+- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$ then $\mathrm{Cv}(\cdot \vdash \chi\ f \equiv \lceil f \rceil)$
+- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$, $n \in \mathrm{Nf}(\cdot \vdash \mathbb{N})$, $r \in \mathrm{Nf}(\cdot \vdash \lceil f \rceil @\ [n]^{\mathbb{N}} \downarrow [f\ n]^{\mathbb{N}})$ then $\mathrm{Cv}(\cdot \vdash R\ f\ n \equiv r)$
 - If $t \in \mathrm{Tm}(\Gamma \vdash A), v \in \mathrm{Nf}(\Gamma \vdash A), p : Red(t,v)$ then $\mathrm{Nf}(\cdot \vdash \ulcorner t \urcorner \downarrow \ulcorner v\urcorner)$
