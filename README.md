@@ -63,7 +63,7 @@ Target theory := MLTT plus
     - otherwise $\chi\ t$ is stuck.
   The important point is to ensure that no convertible terms give different codes (in particular, $\chi$ is stable under substitution).
 
-- a constant $\vdash R : \Pi (f : \mathbb{N} \to \mathbb{N}). \Pi (n : \mathbb{N}). (\chi f) @ [n] \downarrow (f n)$
+- a constant $\vdash R : \Pi (f : \mathbb{N} \to \mathbb{N}). \Pi (n : \mathbb{N}). (\chi f) @ [n] \downarrow [f n]$
 where $\ @\ : \Lambda \to \Lambda \to \Lambda$ is the constructor for application in $\Lambda$, and $[ \cdot ] : \mathbb{N} \to \Lambda$ computes the syntax of a natural number.
   
 - a reduction rule for $R$
