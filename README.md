@@ -78,17 +78,15 @@ $\dot{\chi} @ (\dot{\lambda} (size @(e (Var 0)))$ with $e : \mathbb{N} \rightarr
 May be should the reduction of $q$ and ceiling could lambdas.
 
 Meta-operations on the object type theory:
-- $Tm(\Gamma \vdash A) := \Sigma (t : Tm) \Gamma \vdash t : A$
-- $Nf(\Gamma \vdash A)$ is the subtype of $Tm(\Gamma \vdash A)$ that are in (deep) normal form
-- $\lceil \cdot \rceil : Nf( \cdot \vdash A) \to Tm(\cdot \vdash \Lambda)$
-- $\ulcorner \cdot \urcorner : Tm( \Gamma \vdash A) \to Tm(\cdot \vdash \Lambda)$
-- $\lceil v \rceil := \ulcorner \texttt{injNf} v \urcorner$ where $\texttt{injNf} : Nf(\Gamma \vdash A) \to Tm(\Gamma \vdash A)$
-- $\sharp : \mathbb{N} \to Nf(\cdot \vdash \mathbb{N})$
-- $\mathcal{O} : (f : Nf(\cdot \vdash \mathbb{N} \to \mathbb{N}))(n : Nf(\cdot \vdash \mathbb{N})). Nf(\cdot \vdash \lceil f \rceil @ [n]^{\mathbb{N}} \downarrow [f\,n]^{\mathbb{N}}) \to \square$
+- $\mathrm{Tm}(\Gamma \vdash A) := \Sigma (t : Tm) \Gamma \vdash t : A$
+- $\mathrm{Nf}(\Gamma \vdash A)$ is the subtype of $\mathrm{Tm}(\Gamma \vdash A)$ that are in (deep) normal form
+- $\lceil \cdot \rceil : \mathrm{Nf}( \cdot \vdash A) \to \mathrm{Tm}(\cdot \vdash \Lambda)$
+- $\ulcorner \cdot \urcorner : \mathrm{Tm}( \Gamma \vdash A) \to \mathrm{Tm}(\cdot \vdash \Lambda)$
+- $\lceil v \rceil := \ulcorner \texttt{injNf} v \urcorner$ where $\texttt{injNf} : \mathrm{Nf}(\Gamma \vdash A) \to \mathrm{Tm}(\Gamma \vdash A)$
+- $\sharp : \mathbb{N} \to \mathrm{Nf}(\cdot \vdash \mathbb{N})$
+- $\mathcal{O} : (f : \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N}))(n : \mathrm{Nf}(\cdot \vdash \mathbb{N})). \mathrm{Nf}(\cdot \vdash \lceil f \rceil @ [n]^{\mathbb{N}} \downarrow [f\,n]^{\mathbb{N}}) \to \square$
 
 Employed to  specify the object operations $\chi, R$:
-- If $f \in Nf(\cdot \vdash \mathbb{N} \to \mathbb{N})$ then $Cv(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
-- If $f \in Nf(\cdot \vdash \mathbb{N} \to \mathbb{N})$, $n \in Nf(\cdot \vdash \mathbb{N})$, $r \in Nf(\cdot \vdash \lceil f \rceil @\,[n]^{\mathbb{N}} \downarrow [f\, n]^{\mathbb{N}})$ then $Cv(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
-- If $t \in Tm(\Gamma \vdash A), v \in Nf(\Gamma \vdash A), p : Red(t,v)$ then $Nf(\cdot \vdash \ulcorner t \urcorner \downarrow \ulcorner v\urcorner)$
-
-
+- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$ then $\mathrm{Cv}(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
+- If $f \in \mathrm{Nf}(\cdot \vdash \mathbb{N} \to \mathbb{N})$, $n \in \mathrm{Nf}(\cdot \vdash \mathbb{N})$, $r \in \mathrm{Nf}(\cdot \vdash \lceil f \rceil @\,[n]^{\mathbb{N}} \downarrow [f\, n]^{\mathbb{N}})$ then $\mathrm{Cv}(\cdot \vdash \chi\,f \equiv \lceil f \rceil)$
+- If $t \in \mathrm{Tm}(\Gamma \vdash A), v \in \mathrm{Nf}(\Gamma \vdash A), p : Red(t,v)$ then $\mathrm{Nf}(\cdot \vdash \ulcorner t \urcorner \downarrow \ulcorner v\urcorner)$
