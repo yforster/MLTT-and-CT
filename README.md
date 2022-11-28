@@ -75,7 +75,6 @@ Current (?) plan :
 - describe reduction using the meta-operation from objects $t$ in normal form to codes, denoted $\lceil t \rceil$, which basically "dots" everything. Except for a few cases, and the open questions are, e.g., what should $\lceil \chi t \rceil$ be? ( $q\lceil t\rceil$ ? ) And $\lceil q \rceil$ ? What is the evaluation of :
 $\dot{\chi} @ (\dot{\lambda} (size @(e (Var 0)))$ with $e : \mathbb{N} \rightarrow \Lambda$ and $size : \Lambda \rightarrow \mathbb{N}$ ?
 
-May be should the reduction of $q$ and ceiling could lambdas.
 
 Meta-operations on the object type theory:
 - $\mathrm{Tm}(\Gamma \vdash A) := \Sigma (t : Tm) \Gamma \vdash t : A$
