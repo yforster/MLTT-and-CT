@@ -91,3 +91,25 @@ Employed to  specify the object operations $\chi, R$:
 
 To prove in the NbE model:
 - If $t \in \mathrm{Tm}(\Gamma \vdash A), v \in \mathrm{Nf}(\Gamma \vdash A), p : Red(t,v)$ then $\mathrm{Nf}(\cdot \vdash \ulcorner t \urcorner \downarrow \ulcorner v\urcorner)$
+
+# Simplifying the reduction oracle $\mathcal{O}$
+
+PM: Instead of the oracle $\mathcal{O}$, it's enough to have a conversion rule because proof-irrelevance something-blah.
+
+⊢ t : ℕ → ℕ
+⊢ n : ℕ
+⊢ r : (χ t) @ [n]ℕ ↓ [m]ℕ
+———————————————————————————————
+⊢ R t n ≡ r : (χ t) @ [n]ℕ ↓ [m]ℕ
+
+Consequence that we need:
+(f : Nf(ℕ ⊢ ℕ))(n : Nf(⊢ ℕ))(m : Nf(⊢ ℕ)) → Cv(⊢ f{n} ≡ m) → Nf( ⊢ subst(⌜f⌝, ⌈n⌉) ↓ ⌈m⌉)
+
+Quotation lemma:
+(t : Tm(Γ ⊢ A)) (v : Nf(Γ ⊢ A)) → Cv(Γ ⊢ t ≡ v : A) → Nf(Γ ⊢ ⌜t⌝ ↓ ⌈v⌉)
+
+
+Main issue with respect to conversion and unique normal forms:
+Assuming (strong) CT, we can derive a quote function (the χ : (ℕ → ℕ) → ℕ above)
+that needs to map convertible arguments Γ ⊢ f ≡ g : ℕ → ℕ to convertible results 
+Γ ⊢ χ f ≡ χ g : ℕ (by congruence of application)
