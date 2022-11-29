@@ -42,19 +42,27 @@
 \newcommand{\MLTT}{\ensuremath{\mathsf{MLTT}}}
 
 \newcommand{\Trm}[3]{{{#1} \vdash {#2} : {#3}}}
+\newcommand{\TNf}[2]{ {\mathsf{Nf}}[{{#1} \vdash {#2}}]}
+
 \newcommand{\Code}{\Lambda}
 \newcommand{\Quote}{\chi}
 \newcommand{\Eval}{\qoppa}
 \newcommand{\Red}{\mathrel{\downarrow}}
 \newcommand{\Nat}{\mathbb{N}}
+\newcommand{\TZero}{\mathtt{O}}
+\newcommand{\TSucc}{\mathtt{S}}
 \newcommand{\Type}{\square}
 
 \newcommand{\QNf}[1]{{\ulcorner{#1}\urcorner}}
 
 \newcommand{\CApp}{\bullet}
-\newcommand{\CZero}{\mathbf{0}}
+\newcommand{\CZero}{\mathbf{O}}
 \newcommand{\CSucc}{\mathbf{S}}
+
 \newcommand{\Reif}[2]{{[#1]}^{#2}}
+
+\newcommand{\PNf}[1]{\mathsf{Nf}_{#1}}
+\newcommand{\PNe}[1]{\mathsf{Ne}_{#1}}
 
 \begin{document}
 
@@ -98,10 +106,9 @@ Our type theory is a one-universe \MLTT{} enriched with the following data.\bigs
 \UnaryInfC{$\vdash \Quote : (\Nat \rightarrow \Nat) \rightarrow \Code$}
 \DisplayProof
 &
-\AxiomC{$\vdash \Gamma$}
-\AxiomC{$\vdash f : \Nat \rightarrow \Nat$}
-\AxiomC{$f \in \mathsf{Nf}$}
-\TrinaryInfC{$\Gamma \vdash \Quote\, f \equiv \QNf{f} $}
+\AxiomC{$\Gamma \vdash f : \Nat \rightarrow \Nat$}
+\AxiomC{$f \in \PNf{(\cdot)}$}
+\BinaryInfC{$\Gamma \vdash \Quote\, f \equiv \QNf{f} $}
 \DisplayProof
 
 \\
@@ -126,5 +133,88 @@ Our type theory is a one-universe \MLTT{} enriched with the following data.\bigs
 
 \end{tabular}
 \end{center}
+
+\noindent where $\Reif{\cdot}{\Nat} : \Nat \rightarrow \Code$ is defined internally by induction as
+\begin{center}
+\begin{tabular}{lcl}
+$\Reif{\TZero}{\Nat}$ & $:=$ &$\CZero$ \\
+$\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
+\end{tabular}
+\end{center}
+\noindent and for any context $\Gamma$ the external predicates $\PNf{\Gamma}$ and $\PNe{\Gamma}$ are mutually defined as
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{ccc}
+\AxiomC{$x \in \Gamma$}
+\UnaryInfC{$x \in \PNe{\Gamma}$}
+\DisplayProof
+&
+\AxiomC{$n \in \PNe{\Gamma}$}
+\AxiomC{$v \in \PNf{\Gamma}$}
+\BinaryInfC{$n\, v \in \PNe{\Gamma}$}
+\DisplayProof
+&
+\text{(recursors)}
+
+\\
+
+\AxiomC{$v \in \PNf{\Gamma}$}
+\AxiomC{$v$ not closed}
+\BinaryInfC{$\Quote\, v \in \PNe{\Gamma}$}
+\DisplayProof
+
+&
+
+\multicolumn{2}{c}{
+\AxiomC{$v \in \PNf{\Gamma}$}
+\AxiomC{$v$ not closed}
+\AxiomC{$w \in \PNf{\Gamma}$}
+\AxiomC{$w$ not closed}
+\QuaternaryInfC{$\Eval\, v\, w \in \PNe{\Gamma}$}
+\DisplayProof
+}
+
+\\
+
+\multicolumn{3}{c}{
+\AxiomC{$n \in \PNe{\Gamma}$}
+\UnaryInfC{$n \in \PNf{\Gamma}$}
+\DisplayProof
+}
+
+\\
+
+\AxiomC{\strut$A \in \PNf{\Gamma}$}
+\AxiomC{$v \in \PNf{\Gamma, x : A}$}
+\BinaryInfC{$\lambda x : A.\, v \in \PNf{\Gamma}$}
+\DisplayProof
+
+&
+
+\AxiomC{\strut}
+\UnaryInfC{$\TZero \in \PNf{\Gamma}$}
+\DisplayProof
+
+&
+
+\AxiomC{\strut$v \in \PNf{\Gamma}$}
+\UnaryInfC{$\TSucc\, v \in \PNf{\Gamma}$}
+\DisplayProof
+
+\\
+
+\multicolumn{2}{c}{
+\text{(type former are values)}
+}
+
+&
+
+\text{(code and reduction formers are values)}
+
+\end{tabular}
+\end{center}
+
+\noindent and $\QNf{\cdot}$ is a meta-function $\TNf{\cdot}{\Nat\rightarrow\Nat} \Rightarrow \TNf{\cdot}{\Code}$ satisfying
+\[ [ \cdot \vdash t \equiv u ] \quad \text{implies}\quad \QNf{t} = \QNf{u} \]
 
 \end{document}
