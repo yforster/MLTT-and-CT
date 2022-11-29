@@ -1,5 +1,130 @@
 \documentclass{article}
 
+\usepackage{amssymb}
+\usepackage{bussproofs}
+\usepackage{amsmath}
+\usepackage{pdftexcmds}
+\usepackage{fullpage}
+
+% Blah blah
+\DeclareFontFamily{U}{cbgreek}{}
+\DeclareFontShape{U}{cbgreek}{m}{n}{
+        <-6>    grmn0500
+        <6-7>   grmn0600
+        <7-8>   grmn0700
+        <8-9>   grmn0800
+        <9-10>  grmn0900
+        <10-12> grmn1000
+        <12-17> grmn1200
+        <17->   grmn1728
+      }{}
+\DeclareFontShape{U}{cbgreek}{bx}{n}{
+        <-6>    grxn0500
+        <6-7>   grxn0600
+        <7-8>   grxn0700
+        <8-9>   grxn0800
+        <9-10>  grxn0900
+        <10-12> grxn1000
+        <12-17> grxn1200
+        <17->   grxn1728
+      }{}
+
+\DeclareRobustCommand{\qoppa}{%
+  \text{\usefont{U}{cbgreek}{\normalorbold}{n}\symbol{19}}%
+}
+\makeatletter
+\newcommand{\normalorbold}{%
+  \ifnum\pdf@strcmp{\math@version}{bold}=\z@ bx\else m\fi
+}
+\makeatother
+% End Blah
+
+\newcommand{\MLTT}{\ensuremath{\mathsf{MLTT}}}
+
+\newcommand{\Trm}[3]{{{#1} \vdash {#2} : {#3}}}
+\newcommand{\Code}{\Lambda}
+\newcommand{\Quote}{\chi}
+\newcommand{\Eval}{\qoppa}
+\newcommand{\Red}{\mathrel{\downarrow}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Type}{\square}
+
+\newcommand{\QNf}[1]{{\ulcorner{#1}\urcorner}}
+
+\newcommand{\CApp}{\bullet}
+\newcommand{\CZero}{\mathbf{0}}
+\newcommand{\CSucc}{\mathbf{S}}
+\newcommand{\Reif}[2]{{[#1]}^{#2}}
+
 \begin{document}
-Stub
+
+\section{Object Type Theory}
+
+Our type theory is a one-universe \MLTT{} enriched with the following data.\bigskip
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{cc}
+
+\AxiomC{}
+\UnaryInfC{$\vdash \Code : \Type$}
+\DisplayProof
+&
+\AxiomC{}
+\UnaryInfC{$\vdash {\Red} : \Code \rightarrow \Code \rightarrow \Type$}
+\DisplayProof
+
+\\
+
+\AxiomC{}
+\UnaryInfC{$\vdash \CApp : \Code \rightarrow \Code \rightarrow \Code$}
+\DisplayProof
+
+\\
+
+\AxiomC{}
+\UnaryInfC{$\vdash \CZero : \Code$}
+\DisplayProof
+
+&
+
+\AxiomC{}
+\UnaryInfC{$\vdash \CSucc : \Code \rightarrow \Code$}
+\DisplayProof
+
+\\
+
+\AxiomC{}
+\UnaryInfC{$\vdash \Quote : (\Nat \rightarrow \Nat) \rightarrow \Code$}
+\DisplayProof
+&
+\AxiomC{$\vdash \Gamma$}
+\AxiomC{$\vdash f : \Nat \rightarrow \Nat$}
+\AxiomC{$f \in \mathsf{Nf}$}
+\TrinaryInfC{$\Gamma \vdash \Quote\, f \equiv \QNf{f} $}
+\DisplayProof
+
+\\
+
+\multicolumn{2}{c}{
+\AxiomC{}
+\UnaryInfC{$\vdash \Eval : \Pi (f : \Nat \rightarrow \Nat)\, (n : \Nat).\, {(\Quote\, f)} \CApp \Reif{n}{\Nat} \Red \Reif{f\ n}{\Nat} $}
+\DisplayProof
+}
+
+\\
+
+\multicolumn{2}{c}{
+
+\AxiomC{$\vdash \Gamma$}
+\AxiomC{$\vdash f : \Nat \rightarrow \Nat$}
+\AxiomC{$\vdash n : \Nat$}
+\AxiomC{$\vdash r : {(\Quote\, f)} \CApp \Reif{n}{\Nat} \Red \Reif{f\ n}{\Nat} $}
+\QuaternaryInfC{$\Gamma \vdash \Eval\, f\, n \equiv r $}
+\DisplayProof
+}
+
+\end{tabular}
+\end{center}
+
 \end{document}
