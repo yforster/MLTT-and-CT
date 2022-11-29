@@ -40,9 +40,12 @@
 % End Blah
 
 \newcommand{\MLTT}{\ensuremath{\mathsf{MLTT}}}
+\newcommand{\CT}{\ensuremath{\mathsf{CT}}}
+\newcommand{\CTTT}{\ensuremath{\mathsf{ChTT}}}
 
-\newcommand{\Trm}[3]{{{#1} \vdash {#2} : {#3}}}
+\newcommand{\Trm}[2]{\mathsf{Tm}[{{#1} \vdash {#2}}]}
 \newcommand{\TNf}[2]{ {\mathsf{Nf}}[{{#1} \vdash {#2}}]}
+\newcommand{\TEq}[3]{ {\mathsf{Cv}}[{{#1} \vdash {#2} \equiv {#3}}]}
 
 \newcommand{\Code}{\Lambda}
 \newcommand{\Quote}{\chi}
@@ -66,9 +69,21 @@
 
 \begin{document}
 
-\section{Object Type Theory}
+\section{Conventions}
 
-Our type theory is a one-universe \MLTT{} enriched with the following data.\bigskip
+We are going to manipulate three different logical levels:
+\begin{itemize}
+ \item The meta-theory, an ambient Agda-like constructive type theory not further specified
+ \item The object theory, an extension of $\MLTT$ called $\CTTT$ and described in Section~\ref{CTTT}.
+ \item Codes, closed terms of $\CTTT$ of a specific first-order type of codes called $\Code$.
+\end{itemize}
+
+Since this is confusing enough, we are going to be extremely careful about the precise level we are talking about. We will call \emph{internal} everything stated from within $\CTTT$ and \emph{external} those statements living in the meta-theory, and use notations to highlight the difference of levels. In Section~\ref{CTTT} we present the rules in the usual liberal way, but in-text definitions follow the following conventions. Statements in the object theory are written with brackets $[\cdot]$, e.g.
+$\Trm{\Gamma}{A}$ is the meta-type of well-typed object terms of object type $A$ in object context $\Gamma$. We use a similar notation for hereditarily normal terms $\TNf{\Gamma}{A}$ and conversion $\TEq{\Gamma}{t}{u}$
+
+\section{Object Type Theory}\label{CTTT}
+
+We consider $\CTTT$, a one-universe $\MLTT$ enriched with the following data.\bigskip
 
 \begin{center}
 \renewcommand{\arraystretch}{2}
@@ -134,7 +149,7 @@ Our type theory is a one-universe \MLTT{} enriched with the following data.\bigs
 \end{tabular}
 \end{center}
 
-\noindent where $\Reif{\cdot}{\Nat} : \Nat \rightarrow \Code$ is defined internally by induction as
+\noindent where $\Reif{\cdot}{\Nat} \in \Trm{\cdot}{\Nat \rightarrow \Code}$ is defined internally by induction as
 \begin{center}
 \begin{tabular}{lcl}
 $\Reif{\TZero}{\Nat}$ & $:=$ &$\CZero$ \\
@@ -215,6 +230,24 @@ $\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
 \end{center}
 
 \noindent and $\QNf{\cdot}$ is a meta-function $\TNf{\cdot}{\Nat\rightarrow\Nat} \Rightarrow \TNf{\cdot}{\Code}$ satisfying
-\[ [ \cdot \vdash t \equiv u ] \quad \text{implies}\quad \QNf{t} = \QNf{u} \]
+\[ \TEq{\cdot}{t}{u} \quad \text{implies}\quad \QNf{t} = \QNf{u} \]
+
+\section{Turing-completeness}
+
+In order to derive $\CT$ in $\CTTT$, we have to prove internally that there exists a computable partial function $\mathtt{run} : \Code \rightharpoonup \Nat$ s.t. whenever $t \Red \Reif{n}{\Nat}$ then $\mathtt{run}\, t \rhd n$. For this to make sense we probably need to assume that $\Code$ is a first-order datatype, but apart from that it should be possible to carry the proof in $\MLTT$ alone. % TODO Yannick
+
+\section{Good metatheoretical properties}
+
+We expect that $\CTTT$ is strongly normalizing and enjoys canonicity, and is thus consistent. Furthermore type-checking should be decidable. We show this exhibiting an NbE model, assuming some mild properties on the additional structures.
+
+\begin{itemize}
+ \item The meta-quote function $\QNf{\cdot} \in \TNf{\cdot}{\Nat\rightarrow\Nat} \Rightarrow \TNf{\cdot}{\Code}$ needs to pick a canonical representative in the equivalence class of convertible normal forms, so one has to care about stuff like $\eta$-expansion.
+ \item The predicate $\Red$ should be canonical, i.e. for any two closed terms $t, u \in \Trm{\cdot}{\Code}$ then any two proofs $r, s \in \Trm{\cdot}{t \Red u}$ are convertible, that is we have a proof $\TEq{\cdot}{r}{s}$. This should hold using the intended model that $\Red$ is the inductive characterization of the unique accessibility graph of a deterministic, decidable one-step reduction.
+ \item Conversion to a natural number should be enough to derive a proof of $\Red$.
+ \item More stuff we realize on the way.
+\end{itemize}
+
+The model follows the now standard presentation of decidability of conversion via a logical relation by Abel.
+
 
 \end{document}
