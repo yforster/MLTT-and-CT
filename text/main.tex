@@ -46,18 +46,19 @@
 \newcommand{\Trm}[2]{\mathsf{Tm}[{{#1} \vdash {#2}}]}
 \newcommand{\TNf}[2]{ {\mathsf{Nf}}[{{#1} \vdash {#2}}]}
 \newcommand{\TEq}[3]{ {\mathsf{Cv}}[{{#1} \vdash {#2} \equiv {#3}}]}
+\newcommand{\TRed}[2]{{[\, \vdash {#1} \longrightarrow^* {#2}\,]}}
 
 \newcommand{\Code}{\Lambda}
-\newcommand{\Quote}{\chi}
-\newcommand{\Eval}{\qoppa}
-\newcommand{\Red}{\mathrel{\downarrow}}
-\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\TQuote}{\chi}
+\newcommand{\TEval}{\qoppa}
+\newcommand{\TNat}{\mathbb{N}}
 \newcommand{\TZero}{\mathtt{O}}
 \newcommand{\TSucc}{\mathtt{S}}
 \newcommand{\Type}{\square}
 
 \newcommand{\QNf}[1]{{\ulcorner{#1}\urcorner}}
 
+\newcommand{\CRed}{\mathrel{\downarrow}}
 \newcommand{\CApp}{\bullet}
 \newcommand{\CZero}{\mathbf{O}}
 \newcommand{\CSucc}{\mathbf{S}}
@@ -94,7 +95,7 @@ We consider $\CTTT$, a one-universe $\MLTT$ enriched with the following data.\bi
 \DisplayProof
 &
 \AxiomC{}
-\UnaryInfC{$\vdash {\Red} : \Code \rightarrow \Code \rightarrow \Type$}
+\UnaryInfC{$\vdash {\CRed} : \Code \rightarrow \Code \rightarrow \Type$}
 \DisplayProof
 
 \\
@@ -118,19 +119,19 @@ We consider $\CTTT$, a one-universe $\MLTT$ enriched with the following data.\bi
 \\
 
 \AxiomC{}
-\UnaryInfC{$\vdash \Quote : (\Nat \rightarrow \Nat) \rightarrow \Code$}
+\UnaryInfC{$\vdash \TQuote : (\TNat \rightarrow \TNat) \rightarrow \Code$}
 \DisplayProof
 &
-\AxiomC{$\Gamma \vdash f : \Nat \rightarrow \Nat$}
+\AxiomC{$\Gamma \vdash f : \TNat \rightarrow \TNat$}
 \AxiomC{$f \in \PNf{(\cdot)}$}
-\BinaryInfC{$\Gamma \vdash \Quote\, f \equiv \QNf{f} $}
+\BinaryInfC{$\Gamma \vdash \TQuote\, f \equiv \QNf{f} $}
 \DisplayProof
 
 \\
 
 \multicolumn{2}{c}{
 \AxiomC{}
-\UnaryInfC{$\vdash \Eval : \Pi (f : \Nat \rightarrow \Nat)\, (n : \Nat).\, {(\Quote\, f)} \CApp \Reif{n}{\Nat} \Red \Reif{f\ n}{\Nat} $}
+\UnaryInfC{$\vdash \TEval : \Pi (f : \TNat \rightarrow \TNat)\, (n : \TNat).\, {(\TQuote\, f)} \CApp \Reif{n}{\TNat} \CRed \Reif{f\ n}{\TNat} $}
 \DisplayProof
 }
 
@@ -139,21 +140,21 @@ We consider $\CTTT$, a one-universe $\MLTT$ enriched with the following data.\bi
 \multicolumn{2}{c}{
 
 \AxiomC{$\vdash \Gamma$}
-\AxiomC{$\vdash f : \Nat \rightarrow \Nat$}
-\AxiomC{$\vdash n : \Nat$}
-\AxiomC{$\vdash r : {(\Quote\, f)} \CApp \Reif{n}{\Nat} \Red \Reif{f\ n}{\Nat} $}
-\QuaternaryInfC{$\Gamma \vdash \Eval\, f\, n \equiv r $}
+\AxiomC{$\vdash f : \TNat \rightarrow \TNat$}
+\AxiomC{$\vdash n : \TNat$}
+\AxiomC{$\vdash r : {(\TQuote\, f)} \CApp \Reif{n}{\TNat} \CRed \Reif{f\ n}{\TNat} $}
+\QuaternaryInfC{$\Gamma \vdash \TEval\, f\, n \equiv r $}
 \DisplayProof
 }
 
 \end{tabular}
 \end{center}
 
-\noindent where $\Reif{\cdot}{\Nat} \in \Trm{\cdot}{\Nat \rightarrow \Code}$ is defined internally by induction as
+\noindent where $\Reif{\cdot}{\TNat} \in \Trm{\cdot}{\TNat \rightarrow \Code}$ is defined internally by induction as
 \begin{center}
 \begin{tabular}{lcl}
-$\Reif{\TZero}{\Nat}$ & $:=$ &$\CZero$ \\
-$\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
+$\Reif{\TZero}{\TNat}$ & $:=$ &$\CZero$ \\
+$\Reif{\TSucc\, n}{\TNat}$ & $:=$ &$\CSucc\, \Reif{n}{\TNat}$
 \end{tabular}
 \end{center}
 \noindent and for any context $\Gamma$ the external predicates $\PNf{\Gamma}$ and $\PNe{\Gamma}$ are mutually defined as
@@ -175,7 +176,7 @@ $\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
 
 \AxiomC{$v \in \PNf{\Gamma}$}
 \AxiomC{$v$ not closed}
-\BinaryInfC{$\Quote\, v \in \PNe{\Gamma}$}
+\BinaryInfC{$\TQuote\, v \in \PNe{\Gamma}$}
 \DisplayProof
 
 &
@@ -185,7 +186,7 @@ $\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
 \AxiomC{$v$ not closed}
 \AxiomC{$w \in \PNf{\Gamma}$}
 \AxiomC{$w$ not closed}
-\QuaternaryInfC{$\Eval\, v\, w \in \PNe{\Gamma}$}
+\QuaternaryInfC{$\TEval\, v\, w \in \PNe{\Gamma}$}
 \DisplayProof
 }
 
@@ -229,25 +230,50 @@ $\Reif{\TSucc\, n}{\Nat}$ & $:=$ &$\CSucc\, \Reif{n}{\Nat}$
 \end{tabular}
 \end{center}
 
-\noindent and $\QNf{\cdot}$ is a meta-function $\TNf{\cdot}{\Nat\rightarrow\Nat} \Rightarrow \TNf{\cdot}{\Code}$ satisfying
+\noindent and $\QNf{\cdot}$ is a meta-function $\TNf{\cdot}{\TNat\rightarrow\TNat} \Rightarrow \TNf{\cdot}{\Code}$ satisfying
 \[ \TEq{\cdot}{t}{u} \quad \text{implies}\quad \QNf{t} = \QNf{u} \]
 
 \section{Turing-completeness}
 
-In order to derive $\CT$ in $\CTTT$, we have to prove internally that there exists a computable partial function $\mathtt{run} : \Code \rightharpoonup \Nat$ s.t. whenever $t \Red \Reif{n}{\Nat}$ then $\mathtt{run}\, t \rhd n$. For this to make sense we probably need to assume that $\Code$ is a first-order datatype, but apart from that it should be possible to carry the proof in $\MLTT$ alone. % TODO Yannick
+In order to derive $\CT$ in $\CTTT$, we have to prove internally that there exists a computable partial function $\mathtt{run} : \Code \rightharpoonup \TNat$ s.t. whenever $t \CRed \Reif{n}{\TNat}$ then $\mathtt{run}\, t \rhd n$. For this to make sense we probably need to assume that $\Code$ is a first-order datatype, but apart from that it should be possible to carry the proof in $\MLTT$ alone. % TODO Yannick
 
 \section{Good metatheoretical properties}
 
 We expect that $\CTTT$ is strongly normalizing and enjoys canonicity, and is thus consistent. Furthermore type-checking should be decidable. We show this exhibiting an NbE model, assuming some mild properties on the additional structures.
 
 \begin{itemize}
- \item The meta-quote function $\QNf{\cdot} \in \TNf{\cdot}{\Nat\rightarrow\Nat} \Rightarrow \TNf{\cdot}{\Code}$ needs to pick a canonical representative in the equivalence class of convertible normal forms, so one has to care about stuff like $\eta$-expansion.
- \item The predicate $\Red$ should be canonical, i.e. for any two closed terms $t, u \in \Trm{\cdot}{\Code}$ then any two proofs $r, s \in \Trm{\cdot}{t \Red u}$ are convertible, that is we have a proof $\TEq{\cdot}{r}{s}$. This should hold using the intended model that $\Red$ is the inductive characterization of the unique accessibility graph of a deterministic, decidable one-step reduction.
- \item Conversion to a natural number should be enough to derive a proof of $\Red$.
+ \item The meta-quote function $\QNf{\cdot} \in \TNf{\cdot}{\TNat\rightarrow\TNat} \Rightarrow \TNf{\cdot}{\Code}$ needs to pick a canonical representative in the equivalence class of convertible normal forms, so one has to care about stuff like $\eta$-expansion.
+ \item The predicate $\CRed$ should be canonical, i.e. for any two closed terms $t, u \in \Trm{\cdot}{\Code}$ then any two proofs $r, s \in \Trm{\cdot}{t \CRed u}$ are convertible, that is we have a proof $\TEq{\cdot}{r}{s}$. This should hold using the intended model that $\CRed$ is the inductive characterization of the unique accessibility graph of a deterministic, decidable one-step reduction.
+ \item Conversion to a natural number should be enough to derive a proof of $\CRed$.
  \item More stuff we realize on the way.
 \end{itemize}
 
-The model follows the now standard presentation of decidability of conversion via a logical relation by Abel.
+The model follows the now standard presentation of decidability of conversion via a logical relation by Abel. We tweak it a bit because we need to take into account deep normal forms and thus strong reduction rather than just weak-head reduction, but this should not suppose any foundational issue. We define $\CTTT$ untyped reduction $\TRed{t}{u}$ inductively in the metatheory as the reflexive-transitive closure of a one-step reduction. As usual, it needs to be deterministic, so we have to pick an arbitrary but fixed order for the evaluation of subterms in strong call-by-name. All the rules are standard, except for the handling of our additional constants.
 
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{cc}
+
+% \AxiomC{\strut$t \longrightarrow u$}
+% \UnaryInfC{$\TQuote\ t \longrightarrow \TQuote\ u$}
+% \DisplayProof
+% &
+\AxiomC{\strut$t \in \PNf{(\cdot)}$}
+\UnaryInfC{$\TQuote\ t \longrightarrow \QNf{t}$}
+\DisplayProof
+&
+\AxiomC{\strut$t \in \PNf{(\cdot)}$}
+\AxiomC{\strut$n \in \PNf{(\cdot)}$}
+\AxiomC{\strut$v \in \PNf{(\cdot)}$}
+\AxiomC{\strut$e \in \TRed{t\ n}{v}$}
+\QuaternaryInfC{$\TEval\ t\ n \longrightarrow \QNf{e}^\qoppa$}
+\DisplayProof
+\\
+\multicolumn{2}{c}{
+(additional congruence rules omitted)}
+\end{tabular}
+\end{center}
+
+Here, $\QNf{\cdot}^\qoppa : \Pi (t, u, v \in \PNf{(\cdot)}).\, \TRed{t\ u}{v} \Rightarrow \TNf{\cdot}{\QNf{t} \CApp \QNf{u}\CRed \QNf{v}}$ is a meta-function that quotes object reduction into code reduction. This looks circular, but you can present it with induction-induction and probably just through some encoding of pre-reduction and well-formed reduction, as usual.
 
 \end{document}
