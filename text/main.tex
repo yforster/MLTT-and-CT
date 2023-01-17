@@ -244,7 +244,9 @@ We expect that $\CTTT$ is strongly normalizing and enjoys canonicity, and is thu
 \begin{itemize}
  \item The meta-quote function $\QNf{\cdot} \in \TNf{\cdot}{\TNat\rightarrow\TNat} \Rightarrow \TNf{\cdot}{\Code}$ needs to pick a canonical representative in the equivalence class of convertible normal forms, so one has to care about stuff like $\eta$-expansion.
  \item The predicate $\CRed$ should be canonical, i.e. for any two closed terms $t, u \in \Trm{\cdot}{\Code}$ then any two proofs $r, s \in \Trm{\cdot}{t \CRed u}$ are convertible, that is we have a proof $\TEq{\cdot}{r}{s}$. This should hold using the intended model that $\CRed$ is the inductive characterization of the unique accessibility graph of a deterministic, decidable one-step reduction.
- \item Conversion to a natural number should be enough to derive a proof of $\CRed$.
+ \item Conversion to a natural number should be enough to derive a proof of $\CRed$. Otherwise said if $t$ is convertible to a natural number then their quotes are convertible. As we cannot quote arbitray terms, this is phrased as:
+   $$\TEq{\cdot}{t}{\overline{n}} \Rightarrow \TNf{\cdot}{\QNf{\lambda \_ . t} \CApp [0]^{\mathbb{N}} \downarrow [\overline{n}]^{\mathbb{N}}}$$
+   for $t \in \Trm{\cdot}{\mathbb{N}}$.
  \item More stuff we realize on the way.
 \end{itemize}
 
