@@ -1,4 +1,4 @@
-This is a roadmap for helping the [LogRel](https://github.com/CoqHott/logrel-mltt/) endeavor reach the state needed for the purpose of the formal study of CTTT.
+This is a roadmap for helping the [LogRel](https://github.com/CoqHott/logrel-coq) endeavor reach the state needed for the purpose of the formal study of CTTT.
 
 1. take over the proof of the fundamental lemma of the logical relation (current state: stability by renaming done), for the current system (CCω), which itself decomposes in
     1. defining "validity", ie reducibility under any reducible substitution
